@@ -13,7 +13,7 @@ app.get('/stream', (req, res) => {
 
     setInterval(() => {
         stream.push('   ');
-    }, 500);
+    }, 1000);
 
     stream.pipe(res);
 });
