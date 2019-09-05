@@ -5,7 +5,7 @@ const app = express();
 const stream = new Readable();
 stream._read = () => {};
 
-app.use(express.static('./ui/build'));
+app.use(express.static('./react/build'));
 
 app.get('/stream', (req, res) => {
     res.set('Content-Type', 'application/octet-stream');
