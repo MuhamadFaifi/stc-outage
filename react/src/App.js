@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        {respones && <code>{response}</code>}
+        {response && <code>{response}</code>}
       </header>
     </div>
   );
