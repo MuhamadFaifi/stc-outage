@@ -3,24 +3,18 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  fetch('/stream')
-    .then(response => response.text())
-    .then(data => alert(data));
+  const [response, setResposne] = React.useState(null);
+
+  React.useEffect(() => {
+    fetch('/stream')
+      .then(response => response.body)
+      .catch(err => setResposne(err.toString()));
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {respones && <code>{response}</code>}
       </header>
     </div>
   );
