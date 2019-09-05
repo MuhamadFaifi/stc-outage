@@ -12,7 +12,7 @@ app.get('/stream', (req, res) => {
     res.status(200);
 
     setInterval(() => {
-        stream.push(Uint8Array.from([]));
+        stream.push('f');
     }, 100);
 
     stream.pipe(res);
