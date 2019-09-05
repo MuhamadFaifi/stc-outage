@@ -11,14 +11,15 @@ function App() {
   useInterval(() => {
     setBandwidth(bandwidth => bandwidth += 3);
   }, errors.length === 0 ? 1000 : null);
-  React.useEffect(() => {
-    fetch('/stream').catch(err => addError(errors.concat([err])));
-  }, [errors]);
+  // React.useEffect(() => {
+  //   fetch('/stream').catch(err => addError(errors.concat([err])));
+  // }, [errors]);
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <audio src="/stream" autoPlay />
         <p>bandwidth: {Numeral(bandwidth).format('0.0 b')}</p>
         <p>errors: {errors.length}</p>
         {errors.map(error => <code>{error.toString()}</code>)}

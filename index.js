@@ -8,7 +8,7 @@ stream._read = () => {};
 app.use(express.static('./react/build'));
 
 app.get('/stream', (req, res) => {
-    res.set('Content-Type', 'application/octet-stream');
+    res.set('Content-Type', 'audio/mpeg');
     res.status(200);
 
     setInterval(() => {
