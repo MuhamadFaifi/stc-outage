@@ -36,8 +36,11 @@ app.get('/stream', (req, res) => {
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app);
 
+http.get('*', function(req, res) {  
+    res.redirect('https://stc-outage.wtf');
+});
 httpServer.listen(80, () => {
-	console.log('HTTP Server running on port 80');
+	console.log('Redirect HTTP visitors to HTTPS');
 });
 
 httpsServer.listen(443, () => {
