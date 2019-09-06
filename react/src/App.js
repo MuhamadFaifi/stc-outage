@@ -31,9 +31,13 @@ function App() {
     setPlayed([true, true]);
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     const context = new AudioContext();
+    const gainNode = context.createGain();
     const o = context.createOscillator();
+    gainNode.gain.value = .001;
+    o.connect(gainNode);
+    gainNode.connect(context.destination);
     o.type = "sine";
-    o.connect(context.destination);
+    // o.connect(context.destination);
     o.start();
   };
 
@@ -41,9 +45,14 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        {!played[0] && <button onClick={play}>Play</button>}
-        <p>bandwidth: {Numeral(bandwidth).format('0.0 b')}</p>
-        <p>errors: {errors.length}</p>
+        {!played[0] && <button style={{
+          padding: '10px 25px',
+          color: 'white',
+          border: '1px solid rgba(0,0,0,.3)',
+          color: 'black',
+          borderRadius: '4px'
+        }} onClick={play}>Keep running in background</button>}
+        <p onClick={() => window.location.reload()}>bandwidth: {Numeral(bandwidth).format('0.0 b')}</p>
         {errors.map(error => <code>{error.toString()}</code>)}
       </header>
     </div>

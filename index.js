@@ -12,7 +12,7 @@ app.get('/stream', (req, res) => {
     res.status(200);
 
     setInterval(() => {
-        stream.push('   ');
+        stream.push('');
     }, 1000);
 
     stream.pipe(res);
