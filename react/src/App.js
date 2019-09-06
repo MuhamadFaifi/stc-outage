@@ -47,12 +47,12 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         {!played[0] && <button style={{
           padding: '10px 25px',
-          color: 'white',
+          backgroundColor: 'white',
           border: '1px solid rgba(0,0,0,.3)',
           color: 'black',
           borderRadius: '4px'
-        }} onClick={play}>Keep running in background</button>}
-        <p onClick={() => window.location.reload()}>bandwidth: {Numeral(bandwidth).format('0.0 b')}</p>
+        }} onClick={play}>Keep running in background for ~1 hour</button>}
+        <p onClick={() => window.location.reload()}>streaming: {Numeral(bandwidth).format('0.0 b')}</p>
         {errors.map(error => <code>{error.toString()}</code>)}
       </header>
     </div>
