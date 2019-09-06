@@ -5,18 +5,30 @@ import useInterval from './useInterval';
 import './App.css';
 
 function App() {
+  const [played, setPlayed] = React.useState([false, false]);
   const [bandwidth, setBandwidth] = React.useState(0);
   const [errors, addError] = React.useState([]);
 
+  let delay;
+
+  if (errors.length > 0) {
+    delay = null;
+  } else if (played[0] && !played[1]) {
+    delay = null;
+  } else {
+    delay = 1000;
+  }
+
   useInterval(() => {
     setBandwidth(bandwidth => bandwidth += 3);
-  }, errors.length === 0 ? 1000 : null);
+  }, delay);
 
   React.useEffect(() => {
     fetch('/stream').catch(err => addError(errors.concat([err])));
   }, [errors]);
 
   function play() {
+    setPlayed([true, true]);
     const context = new AudioContext();
     const o = context.createOscillator();
     o.type = "sine";
