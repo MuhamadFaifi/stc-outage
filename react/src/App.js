@@ -29,6 +29,7 @@ function App() {
 
   function play() {
     setPlayed([true, true]);
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
     const context = new AudioContext();
     const o = context.createOscillator();
     o.type = "sine";
