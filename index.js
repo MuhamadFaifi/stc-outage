@@ -29,6 +29,10 @@ app.get('/stream', (req, res) => {
     }, 1500);
 
     stream.pipe(res);
+    req.on('abort', () => {
+        stream.unpipe();
+        res.end();
+    });
 });
 
 const httpsServer = https.createServer(credentials, app);
