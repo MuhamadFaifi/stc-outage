@@ -23,7 +23,7 @@ function App() {
               return;
             }
 
-            setBandwidth(value.length);
+            setBandwidth(bytes => bytes += value.length);
             readBytes();
           } catch(error) {
             addError(errors.concat([error]));
