@@ -40,7 +40,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <button onClick={play}>Play</button>
+        {!played[0] && <button onClick={play}>Play</button>}
         <p>bandwidth: {Numeral(bandwidth).format('0.0 b')}</p>
         <p>errors: {errors.length}</p>
         {errors.map(error => <code>{error.toString()}</code>)}
