@@ -34,7 +34,7 @@ app.get('/stream', (req, res) => {
 
 // Starting both http & https servers
 http
-.createServer(() => (req, res) => {
+.createServer((req, res) => {
     res.redirect('https://stc-outage.wtf');
 })
 .listen(80, () => {

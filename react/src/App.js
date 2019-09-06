@@ -9,22 +9,30 @@ function App() {
   const [bandwidth, setBandwidth] = React.useState(0);
   const [errors, addError] = React.useState([]);
 
-  let delay;
-
-  if (errors.length > 0) {
-    delay = null;
-  } else if (played[0] && !played[1]) {
-    delay = null;
-  } else {
-    delay = 1500;
-  }
-
-  useInterval(() => {
-    setBandwidth(bandwidth => bandwidth += 3);
-  }, delay);
-
   React.useEffect(() => {
-    fetch('/stream').catch(err => addError(errors.concat([err])));
+    fetch('/stream')
+      .then(res => {
+        const reader = res.body.getReader();
+
+        async function readBytes() {
+          try {
+            const { done, value } = await reader.read();
+            
+            if (done) {
+              addError(errors.concat([new TypeError('done === true')]));
+              return;
+            }
+
+            setBandwidth(value.length);
+            readBytes();
+          } catch(error) {
+            addError(errors.concat([error]));
+          }
+        }
+        
+        readBytes();
+      })
+      .catch(err => addError(errors.concat([err])));
   }, [errors]);
 
   function play() {
