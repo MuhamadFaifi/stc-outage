@@ -33,15 +33,14 @@ app.get('/stream', (req, res) => {
 });
 
 // Starting both http & https servers
-const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials, app);
-
-http.get('*', function(req, res) {  
+http
+.createServer(() => (req, res) => {
     res.redirect('https://stc-outage.wtf');
-});
-httpServer.listen(80, () => {
+})
+.listen(80, () => {
 	console.log('Redirect HTTP visitors to HTTPS');
 });
+const httpsServer = https.createServer(credentials, app);
 
 httpsServer.listen(443, () => {
 	console.log('HTTPS Server running on port 443');
