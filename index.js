@@ -24,14 +24,15 @@ app.get('/stream', (req, res) => {
     res.set('Content-Type', 'application/octet-stream');
     res.status(200);
 
-    setInterval(() => {
+    const interval = setInterval(() => {
         stream.push('   ');
     }, 1500);
 
     stream.pipe(res);
-    req.on('abort', () => {
+    stream.on('close', () => {
+        console.log('closed pipe!\n');
+        clearInterval(interval);
         stream.unpipe(res);
-        res.end();
     });
 });
 
