@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
 import Numeral from 'numeral';
-import useInterval from './useInterval';
 import './App.css';
 
 function App() {
@@ -59,7 +58,7 @@ function App() {
           border: '1px solid rgba(0,0,0,.3)',
           color: 'black',
           borderRadius: '4px'
-        }} onClick={play}>Keep running in background for ~1 hour</button>}
+        }} onClick={play}>Keep running in background for ~1 hour (IPhone)</button>}
         <p onClick={() => window.location.reload()}>streaming: {Numeral(bandwidth).format('0.0 b')}</p>
         {errors.map(error => <code>{error.toString()}</code>)}
       </header>

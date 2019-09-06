@@ -1,6 +1,5 @@
 const express = require('express');
 const fs = require('fs');
-const http = require('http');
 const https = require('https');
 const Readable = require('stream').Readable;
 
@@ -32,14 +31,6 @@ app.get('/stream', (req, res) => {
     stream.pipe(res);
 });
 
-// Starting both http & https servers
-http
-.createServer((req, res) => {
-    res.redirect('https://stc-outage.wtf');
-})
-.listen(80, () => {
-	console.log('Redirect HTTP visitors to HTTPS');
-});
 const httpsServer = https.createServer(credentials, app);
 
 httpsServer.listen(443, () => {
