@@ -16,7 +16,7 @@ function App() {
   } else if (played[0] && !played[1]) {
     delay = null;
   } else {
-    delay = 1000;
+    delay = 1500;
   }
 
   useInterval(() => {
