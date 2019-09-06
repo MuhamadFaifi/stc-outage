@@ -30,7 +30,7 @@ app.get('/stream', (req, res) => {
 
     stream.pipe(res);
     req.on('abort', () => {
-        stream.unpipe();
+        stream.unpipe(res);
         res.end();
     });
 });
