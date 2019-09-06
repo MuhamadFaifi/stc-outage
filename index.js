@@ -29,8 +29,8 @@ app.get('/stream', (req, res) => {
     }, 1500);
 
     stream.pipe(res);
-    stream.on('close', () => {
-        console.log('closed pipe!\n');
+    res.on('close', () => {
+        console.log('closed res!\n');
         clearInterval(interval);
         stream.unpipe(res);
     });
