@@ -4,8 +4,6 @@ const https = require('https');
 const Readable = require('stream').Readable;
 
 const app = express();
-const stream = new Readable();
-stream._read = () => {};
 
 // Certificate
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/stc-outage.wtf/privkey.pem', 'utf8');
@@ -24,14 +22,18 @@ app.get('/stream', (req, res) => {
     res.set('Content-Type', 'application/octet-stream');
     res.status(200);
 
+    const stream = new Readable();
+    stream._read = () => {};
+    stream.pipe(res);
+
     const interval = setInterval(() => {
         stream.push('a');
     }, 500);
 
-    stream.pipe(res);
     res.on('close', () => {
         clearInterval(interval);
         stream.unpipe(res);
+        stream.destroy();
     });
 });
 
